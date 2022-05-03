@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { userClearError, userLogin } from "../../store/actions/user-action";
+import { userClearError, userLogin } from "../store/actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import { useRedirectLogUser } from "../../hooks/redirect-hook";
 
