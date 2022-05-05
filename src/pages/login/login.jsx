@@ -4,9 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { userClearError, userLogin } from "../store/actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import { useRedirectLogUser } from "../../hooks/redirect-hook";
+import { userClearError, userLogin } from "../../store/actions/UserAction";
+import TitlePage from "../../components/TitlePage";
 
 const loginSchema = yup
   .object({
@@ -39,10 +40,12 @@ const LoginPage = () => {
   const onSubmit = ({ login, password }) => {
     dispatch(userLogin({ identifier: login, password }));
   };
+  const navigate = useNavigate();
 
   return (
     <>
-      <h1>Login</h1>
+      <button onClick={() => navigate(-1)}>go back</button>
+      <TitlePage content="Login" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box gap="20px" display="flex" flexDirection="column">
           <Controller

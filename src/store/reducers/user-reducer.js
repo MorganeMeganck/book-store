@@ -4,7 +4,7 @@ import {
   userLogout,
   userSendError,
   userToken,
-} from "../actions/user-action";
+} from "../actions/UserAction";
 
 const initialState = {
   token: null,

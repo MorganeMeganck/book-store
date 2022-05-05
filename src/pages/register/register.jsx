@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useRedirectLogUser } from "../../hooks/redirect-hook";
-import { userRegister } from "../../store/actions/user-action";
+import { userRegister } from "../../store/actions/UserAction";
 
 const registerSchema = yup
   .object({
