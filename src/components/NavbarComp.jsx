@@ -9,7 +9,6 @@ const NavbarComp = () => {
     <Navbar id="header" className="navbar">
       <div id="header-container" className="container navbar-container">
         <div className="navbar-header">
-          <Navbar.Brand className="navbar-brand" href="/"></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
@@ -22,7 +21,7 @@ const NavbarComp = () => {
             >
               Books
             </NavLink>
-            <a class="navbarLink" href="#">
+            <a className="navbarLink" href="/login">
               Login
             </a>
           </Nav>

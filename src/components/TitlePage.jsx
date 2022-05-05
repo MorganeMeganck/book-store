@@ -1,12 +1,5 @@
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
-const TitlePage = ({ content }) => (
-    <Typography
-        component='h2'
-        variant='h4'
-        marginTop={1} >
-        {content}
-    </Typography>
-);
+const TitlePage = ({ content }) => <h1>{content}</h1>;
 
 export default TitlePage;
