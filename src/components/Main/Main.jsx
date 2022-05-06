@@ -11,8 +11,8 @@ const Main = () => {
   return (
     <>
       <div
-        className={`${style.boxGlass} text-white p-5 mt-5 d-flex flex-column justify-content-center
-        `}
+        className="boxGlass text-white p-5 mt-5 d-flex flex-column justify-content-center
+        "
       >
         <div className="d-flex justify-content-between align-items-center gap-3">
           <div className="d-flex justify-content-start align-items-center gap-3">

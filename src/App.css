@@ -69,7 +69,6 @@ button {
   background-color: white;
 }
 .boxGlass {
-  display: grid;
   height: 97%;
   width: 97%;
   background: var(--glass);
