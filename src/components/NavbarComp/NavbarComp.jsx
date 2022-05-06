@@ -1,11 +1,15 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { userLogout } from "../../store/actions/UserAction";
 import style from "./NavbarComp.module.scss";
 
 const NavbarComp = () => {
+  const userToken = useSelector((state) => state.user.token);
+  const dispatch = useDispatch();
+
   return (
     <Navbar id="header" className={style.navbar}>
       <div id="header-container" className="container navbar-container">
@@ -22,9 +26,20 @@ const NavbarComp = () => {
             >
               Books
             </NavLink>
-            <a className="navbarLink" href="/login">
-              Login
-            </a>
+            {userToken ? (
+              <span
+                className="navbarLink"
+                onClick={() => {
+                  dispatch(userLogout());
+                }}
+              >
+                Logout
+              </span>
+            ) : (
+              <a className="navbarLink" href="/login">
+                Login
+              </a>
+            )}
           </Nav>
         </Navbar.Collapse>
       </div>
