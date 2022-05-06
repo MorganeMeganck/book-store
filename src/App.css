@@ -12,15 +12,18 @@
 
 body {
   background: linear-gradient(
-    106.37deg,
-    #ffa07a 29.63%,
-    #f7907d 51.55%,
-    #f08080 90.85%
-  );
+      106.37deg,
+      #ffa07a 29.63%,
+      #f7907d 51.55%,
+      #f08080 90.85%
+    )
+    no-repeat;
   font-family: "Rajdhani", sans-serif;
+  min-height: 100vh;
 }
 h1 {
   font-family: "Montserrat Subrayada", sans-serif;
+  margin: 0;
 }
 .App-logo {
   height: 40vmin;
@@ -64,4 +67,14 @@ button {
   color: var(--salmon);
   font-weight: 700;
   background-color: white;
+}
+.boxGlass {
+  display: grid;
+  height: 97%;
+  width: 97%;
+  background: var(--glass);
+  border-radius: 2rem;
+  gap: 16px;
+  grid-template-columns: 11rem auto 20rem;
+  overflow: hidden;
 }
