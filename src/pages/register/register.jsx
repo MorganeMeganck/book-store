@@ -39,8 +39,9 @@ const RegisterPage = () => {
     reValidateMode: "onSubmit",
   });
 
-  const onSubmit = ({ pseudo, email, password }) => {
-    dispatch(userRegister({ pseudo, email, password }));
+  const onSubmit = ({ email, password }) => {
+    console.log(email, password);
+    dispatch(userRegister({ email, password }));
   };
 
   return (

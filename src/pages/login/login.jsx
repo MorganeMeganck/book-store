@@ -11,7 +11,7 @@ import TitlePage from "../../components/TitlePage";
 
 const loginSchema = yup
   .object({
-    login: yup.string().trim().required(),
+    email: yup.string().trim().required(),
     password: yup.string().required(),
   })
   .required();
@@ -30,15 +30,15 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      login: "",
+      email: "",
       password: "",
     },
     resolver: yupResolver(loginSchema),
     reValidateMode: "onSubmit",
   });
 
-  const onSubmit = ({ login, password }) => {
-    dispatch(userLogin({ identifier: login, password }));
+  const onSubmit = ({ email, password }) => {
+    dispatch(userLogin({ email, password }));
   };
   const navigate = useNavigate();
 
@@ -51,13 +51,13 @@ const LoginPage = () => {
           <Controller
             render={({ field }) => (
               <TextField
-                error={errors.login}
+                error={errors.email}
                 fullWidth
                 label="Login / E-mail"
                 {...field}
               />
             )}
-            name="login"
+            name="email"
             control={control}
             defaultValue=""
           />

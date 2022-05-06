@@ -3,13 +3,12 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 export const userToken = createAction("user/token", ({ token, expire }) => {
-  const { pseudo, isAdmin } = jwtDecode(token);
+  const { email } = jwtDecode(token.token);
   return {
     payload: {
-      token,
+      token: token.token,
       expire,
-      pseudo,
-      isAdmin,
+      email,
     },
   };
 });
@@ -19,10 +18,10 @@ export const userLogout = createAction("user/logout");
 export const userSendError = createAction("user/sendError");
 export const userClearError = createAction("user/clearRrror");
 
-export const userLogin = ({ identifier, password }) => {
+export const userLogin = ({ email, password }) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8080/api/auth/login", { identifier, password })
+      .post("http://localhost:8080/auth/login", { email, password })
       .then(({ data }) => {
         dispatch(userToken(data));
       })
@@ -32,11 +31,10 @@ export const userLogin = ({ identifier, password }) => {
   };
 };
 
-export const userRegister = ({ pseudo, email, password }) => {
+export const userRegister = ({ email, password }) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8080/api/auth/register", {
-        pseudo,
+      .post("http://localhost:8080/auth/register", {
         email,
         password,
       })

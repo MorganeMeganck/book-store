@@ -9,8 +9,7 @@ import {
 const initialState = {
   token: null,
   expire: null,
-  pseudo: null,
-  isAdmin: null,
+  email: null,
   error: false,
 };
 
