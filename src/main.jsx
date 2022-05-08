@@ -11,6 +11,7 @@ import NotFound from "./pages/errors/NotFound";
 import RegisterPage from "./pages/register/register";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import BookDetail from "./components/Book/BookDetail";
 
 let persistor = persistStore(store);
 
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/add" element={<AddBook />} />
+            <Route path="/books/:id" element={<BookDetail />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
