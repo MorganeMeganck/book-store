@@ -27,18 +27,23 @@ const NavbarComp = () => {
               Books
             </NavLink>
             {userToken ? (
-              <span
+              <a
                 className="navbarLink"
                 onClick={() => {
                   dispatch(userLogout());
                 }}
               >
                 Logout
-              </span>
-            ) : (
-              <a className="navbarLink" href="/login">
-                Login
               </a>
+            ) : (
+              <>
+                <a className="navbarLink" href="/login">
+                  Login
+                </a>
+                <a className="navbarLink" href="/register">
+                  Register
+                </a>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

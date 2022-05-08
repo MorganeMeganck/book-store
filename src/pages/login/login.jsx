@@ -44,7 +44,12 @@ const LoginPage = () => {
 
   return (
     <>
-      <button onClick={() => navigate(-1)}>go back</button>
+      <button
+        className="btn btn-light text-primary"
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </button>
       <TitlePage content="Login" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box gap="20px" display="flex" flexDirection="column">
