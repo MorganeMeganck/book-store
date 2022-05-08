@@ -1,41 +1,121 @@
 import { Rating, Typography } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormLabel,
+  TextField,
+} from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { Form, FormControl } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import TitlePage from "./TitlePage";
+import { useSelector } from "react-redux";
+const URL = "http://localhost:8080/books";
 
 const AddBook = () => {
+  const token = useSelector((state) => state.user.token);
+  const history = useNavigate();
   const [note, setValue] = useState(0);
+  const [inputs, setInputs] = useState({
+    name: "",
+    description: "",
+    category: "",
+    author: "",
+    image: "",
+  });
+  const [checked, setChecked] = useState(false);
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const sendRequest = async () => {
+    return await axios
+      .post(URL, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        name: String(inputs.name),
+        author: String(inputs.author),
+        description: String(inputs.description),
+        category: String(inputs.category),
+        note: Number(inputs.note),
+        image: String(inputs.image),
+        completed: Boolean(checked),
+      })
+      .then((res) => res.data);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs, checked);
+    sendRequest().then(() => history("/books"));
+  };
+
   return (
     <>
       <div className="boxGlass text-white container p-5">
         <TitlePage content="Add a Book" />
-        <Form className="flex-column">
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="name" placeholder="Tape the name of the book" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicAuthor">
-            <Form.Label>Author</Form.Label>
-            <Form.Control
-              type="author"
-              placeholder="Tape the author of the book"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicDescription">
-            <Form.Label>Description</Form.Label>
-            <FormControl as="textarea" aria-label="With textarea" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCategory">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="category"
-              placeholder="Tape the category of the book"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Completed" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicRating">
+        <form onSubmit={handleSubmit}>
+          <FormLabel>Name</FormLabel>
+          <TextField
+            value={inputs.name}
+            onChange={handleChange}
+            margin="normal"
+            fullWidth
+            variant="filled"
+            name="name"
+          />
+          <FormLabel>Author</FormLabel>
+          <TextField
+            value={inputs.author}
+            onChange={handleChange}
+            margin="normal"
+            fullWidth
+            variant="filled"
+            name="author"
+          />
+          <FormLabel>Description</FormLabel>
+          <TextField
+            value={inputs.description}
+            onChange={handleChange}
+            margin="normal"
+            fullWidth
+            variant="filled"
+            name="description"
+          />
+          <FormLabel>Category</FormLabel>
+          <TextField
+            value={inputs.category}
+            onChange={handleChange}
+            margin="normal"
+            fullWidth
+            variant="filled"
+            name="category"
+          />
+          <FormLabel>Image</FormLabel>
+          <TextField
+            value={inputs.image}
+            onChange={handleChange}
+            margin="normal"
+            fullWidth
+            variant="filled"
+            name="image"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+              />
+            }
+            label="Completed"
+          />
+          <div className="d-flex flex-column my-3">
             <Typography component="legend">Note</Typography>
             <Rating
               name="simple-controlled"
@@ -44,9 +124,19 @@ const AddBook = () => {
                 setValue(newNote);
               }}
             />
-          </Form.Group>
-          <a className="btn btn-light text-primary fw-bold">Submit</a>
-        </Form>
+          </div>
+
+          <Button
+            sx={{
+              backgroundColor: "white",
+              color: "#ffa07a",
+            }}
+            variant="contained"
+            type="submit"
+          >
+            Add Book
+          </Button>
+        </form>
       </div>
     </>
   );
