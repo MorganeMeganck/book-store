@@ -4,8 +4,11 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import Footer from "../../components/Footer/Footer";
+import NavbarComp from "../../components/NavbarComp/NavbarComp";
+import TitlePage from "../../components/TitlePage";
 import { useRedirectLogUser } from "../../hooks/redirect-hook";
 import { userRegister } from "../../store/actions/UserAction";
 
@@ -21,7 +24,7 @@ const registerSchema = yup
   .required();
 
 const RegisterPage = () => {
-  useRedirectLogUser();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -40,64 +43,72 @@ const RegisterPage = () => {
   });
 
   const onSubmit = ({ email, password }) => {
-    console.log(email, password);
     dispatch(userRegister({ email, password }));
+    navigate({ to: "/login" });
   };
 
   return (
     <>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack gap="20px">
-          <Controller
-            render={({ field }) => (
-              <TextField
-                error={errors.email}
-                fullWidth
-                label="Email"
-                {...field}
-              />
-            )}
-            name="email"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                error={errors.password}
-                fullWidth
-                label="Password"
-                type="password"
-                {...field}
-              />
-            )}
-            name="password"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                error={errors.passwordConfirm}
-                fullWidth
-                label="Confirmation"
-                type="password"
-                {...field}
-              />
-            )}
-            name="passwordConfirm"
-            control={control}
-            defaultValue=""
-          />
+      <NavbarComp />
+      <div className="boxGlass text-white container p-5">
+        <TitlePage content="Register" />
+        <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
+          <Stack gap="20px">
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  error={errors.email}
+                  fullWidth
+                  label="Email"
+                  {...field}
+                />
+              )}
+              name="email"
+              control={control}
+              defaultValue=""
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  error={errors.password}
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  {...field}
+                />
+              )}
+              name="password"
+              control={control}
+              defaultValue=""
+            />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  error={errors.passwordConfirm}
+                  fullWidth
+                  label="Confirmation"
+                  type="password"
+                  {...field}
+                />
+              )}
+              name="passwordConfirm"
+              control={control}
+              defaultValue=""
+            />
 
-          <Box alignSelf="flex-start">
-            <Button variant="contained" type="submit">
-              Envoyer
-            </Button>
-          </Box>
-        </Stack>
-      </form>
+            <Box alignSelf="flex-start">
+              <button
+                className="btn btn-light text-primary fw-bold"
+                variant="contained"
+                type="submit"
+              >
+                Envoyer
+              </button>
+            </Box>
+          </Stack>
+        </form>
+      </div>
+      <Footer />
     </>
   );
 };

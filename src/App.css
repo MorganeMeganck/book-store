@@ -77,3 +77,16 @@ button {
   grid-template-columns: 11rem auto 20rem;
   overflow: hidden;
 }
+.clamp {
+  width: 300px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.card {
+  border: 1px solid white;
+}
+.btn-primary {
+  color: white;
+}

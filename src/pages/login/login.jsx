@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useRedirectLogUser } from "../../hooks/redirect-hook";
 import { userClearError, userLogin } from "../../store/actions/UserAction";
 import TitlePage from "../../components/TitlePage";
+import NavbarComp from "../../components/NavbarComp/NavbarComp";
+import Footer from "../../components/Footer/Footer";
 
 const loginSchema = yup
   .object({
@@ -44,51 +46,53 @@ const LoginPage = () => {
 
   return (
     <>
-      <button
-        className="btn btn-light text-primary"
-        onClick={() => navigate(-1)}
-      >
-        Go back
-      </button>
-      <TitlePage content="Login" />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box gap="20px" display="flex" flexDirection="column">
-          <Controller
-            render={({ field }) => (
-              <TextField
-                error={errors.email}
-                fullWidth
-                label="Login / E-mail"
-                {...field}
-              />
-            )}
-            name="email"
-            control={control}
-            defaultValue=""
-          />
+      <NavbarComp />
+      <div className="boxGlass text-white container p-5">
+        <TitlePage content="Login" />
+        <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
+          <Box gap="20px" display="flex" flexDirection="column">
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  error={errors.email}
+                  fullWidth
+                  label="Login / E-mail"
+                  {...field}
+                />
+              )}
+              name="email"
+              control={control}
+              defaultValue=""
+            />
 
-          <Controller
-            render={({ field }) => (
-              <TextField
-                error={errors.password}
-                fullWidth
-                label="Password"
-                type="password"
-                {...field}
-              />
-            )}
-            name="password"
-            control={control}
-            defaultValue=""
-          />
+            <Controller
+              render={({ field }) => (
+                <TextField
+                  error={errors.password}
+                  fullWidth
+                  label="Password"
+                  type="password"
+                  {...field}
+                />
+              )}
+              name="password"
+              control={control}
+              defaultValue=""
+            />
 
-          <Box alignSelf="flex-start">
-            <Button variant="contained" type="submit">
-              Envoyer
-            </Button>
+            <Box alignSelf="flex-start">
+              <button
+                className="btn btn-light text-primary fw-bold"
+                variant="contained"
+                type="submit"
+              >
+                Envoyer
+              </button>
+            </Box>
           </Box>
-        </Box>
-      </form>
+        </form>
+      </div>
+      <Footer />
     </>
   );
 };

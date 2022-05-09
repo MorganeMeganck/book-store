@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { userLogout } from "../../store/actions/UserAction";
 import style from "./NavbarComp.module.scss";
 
@@ -37,12 +37,12 @@ const NavbarComp = () => {
               </a>
             ) : (
               <>
-                <a className="navbarLink" href="/login">
+                <Link className="navbarLink" to="/login">
                   Login
-                </a>
-                <a className="navbarLink" href="/register">
+                </Link>
+                <Link className="navbarLink" to={"/register"}>
                   Register
-                </a>
+                </Link>
               </>
             )}
           </Nav>

@@ -25,11 +25,8 @@ const Main = () => {
                 height={50}
               />
             </div>
-            <TitlePage content="Book App" />
+            <TitlePage content="Pinakes" />
           </div>
-          <a href="/add" className="btn btn-light text-primary fw-bold">
-            Add a book
-          </a>
         </div>
 
         <Books />
