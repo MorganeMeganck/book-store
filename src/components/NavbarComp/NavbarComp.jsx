@@ -31,6 +31,7 @@ const NavbarComp = () => {
                 className="navbarLink"
                 onClick={() => {
                   dispatch(userLogout());
+                  location.reload();
                 }}
               >
                 Logout

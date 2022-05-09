@@ -31,7 +31,11 @@ const Books = () => {
   return (
     <>
       {categoryItems && (
-        <Buttons filterBook={setfilterBook} categoryItems={categoryItems} />
+        <Buttons
+          filterBook={setfilterBook}
+          categoryItems={categoryItems}
+          books={books}
+        />
       )}
       <div>
         {books && (
@@ -60,7 +64,7 @@ const Books = () => {
 };
 
 export default Books;
-const Buttons = ({ filterBook, categoryItems }) => {
+const Buttons = ({ filterBook, categoryItems, books }) => {
   return (
     <>
       <div className="d-flex justify-content-center mb-3">
@@ -78,12 +82,14 @@ const Buttons = ({ filterBook, categoryItems }) => {
             </button>
           );
         })}
-        <button
-          className="btn btn-outline-dark p-1 px-3 mx-5 fw-bold btn"
-          onClick={() => filterBook("")}
-        >
-          All
-        </button>
+        {books.length > 2 && (
+          <button
+            className="btn btn-outline-dark p-1 px-3 mx-5 fw-bold btn"
+            onClick={() => filterBook("")}
+          >
+            All
+          </button>
+        )}
       </div>
     </>
   );

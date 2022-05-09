@@ -44,7 +44,7 @@ const RegisterPage = () => {
 
   const onSubmit = ({ email, password }) => {
     dispatch(userRegister({ email, password }));
-    navigate({ to: "/login" });
+    location.href = "/login";
   };
 
   return (
