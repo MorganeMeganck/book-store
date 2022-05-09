@@ -12,6 +12,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TitlePage from "./TitlePage";
 import { useSelector } from "react-redux";
+import NavbarComp from "./NavbarComp/NavbarComp";
+import Footer from "./Footer/Footer";
 const URL = "http://localhost:8080/books";
 
 const AddBook = () => {
@@ -35,29 +37,34 @@ const AddBook = () => {
 
   const sendRequest = async () => {
     return await axios
-      .post(URL, {
-        headers: {
-          Authorization: "Bearer " + token,
+      .post(
+        URL,
+        {
+          name: String(inputs.name),
+          author: String(inputs.author),
+          description: String(inputs.description),
+          category: String(inputs.category),
+          note: Number(note),
+          image: String(inputs.image),
+          completed: Boolean(checked),
         },
-        name: String(inputs.name),
-        author: String(inputs.author),
-        description: String(inputs.description),
-        category: String(inputs.category),
-        note: Number(inputs.note),
-        image: String(inputs.image),
-        completed: Boolean(checked),
-      })
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
       .then((res) => res.data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs, checked);
-    sendRequest().then(() => history("/books"));
+    sendRequest().then(() => history("/"));
   };
 
   return (
     <>
+      <NavbarComp />
       <div className="boxGlass text-white container p-5">
         <TitlePage content="Add a Book" />
         <form onSubmit={handleSubmit}>
@@ -138,6 +145,7 @@ const AddBook = () => {
           </Button>
         </form>
       </div>
+      <Footer />
     </>
   );
 };
